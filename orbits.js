@@ -24,6 +24,7 @@ const STABLE_COLOR = STABLE_COLOR_RED + "," + STABLE_COLOR_GREEN + "," + STABLE_
 const GHOST_OPACITY = 0.5;
 const COUNT_UNTIL_STABLE = 60;
 const EXTRA_COUNT_UNTIL_ALL_STABLE = 1200;
+const EXTRA_SPACE_WHEN_COLLIDING = 0.5;
 
 /* Classes */
 class Vector{
@@ -235,8 +236,8 @@ function update(){
     
                     const collide_axe = collide_vec.multiply(1.0 / dist);
     
-                    current_ball.position.mutable_add(collide_axe.multiply(0.5 * (minDist - dist)));
-                    collider.position.mutable_subtract(collide_axe.multiply(0.5 * (minDist - dist)));
+                    current_ball.position.mutable_add(collide_axe.multiply(0.5 * (minDist - dist) + EXTRA_SPACE_WHEN_COLLIDING));
+                    collider.position.mutable_subtract(collide_axe.multiply(0.5 * (minDist - dist) + EXTRA_SPACE_WHEN_COLLIDING));
                 }
             }
         }
