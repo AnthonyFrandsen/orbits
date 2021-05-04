@@ -1,9 +1,10 @@
-body{
+body, html{
     margin: 0;
     background-color: black;
     padding: 0;
     color: white;
     font-family: 'Source Sans Pro', sans-serif;
+    overflow: hidden;
 }
 
 header{

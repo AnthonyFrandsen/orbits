@@ -181,6 +181,12 @@ window.addEventListener("load", function(){
     canvas.onselectstart = function(){return false;} //prevent clicking from selecting text on document
     context = canvas.getContext("2d");
 
+    //Resizing the window also resizes the canvas
+    window.addEventListener('resize', function(){
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
     //Click the screen to add a ball
     canvas.addEventListener( "click", addBall);
 
@@ -199,7 +205,7 @@ function getMousePos(event) {
 
 function addBall(event){
     //add a ball where the mouse currently is
-    balls.push(new Ball(getMousePos(event).x, getMousePos(event).y));
+    balls.push(new Ball(getMousePos(event).x - canvas.width / 2, getMousePos(event).y - canvas.height / 2));
 }
 
 function update(){
@@ -213,7 +219,7 @@ function update(){
         });
         for (let i = 0; i < balls.length; i++){
             current_ball = balls[i];
-            let to_center = new Vector(canvas.width * 0.5, canvas.height * 0.5);
+            let to_center = new Vector(0, 0);
             to_center.mutable_subtract(current_ball.position);
             to_center.mutable_multiply(ATTRACTION_FORCE);
             current_ball.velocity.mutable_add(to_center);
@@ -263,8 +269,14 @@ function update(){
         if (ball.history.length > 0){
             for (i = 1; i < ball.history.length; i++){
                 context.beginPath();
-                context.moveTo(ball.history[i - 1].x, ball.history[i - 1].y);
-                context.lineTo(ball.history[i].x, ball.history[i].y); 
+                context.moveTo(
+                    ball.history[i - 1].x + canvas.width / 2,
+                    ball.history[i - 1].y + canvas.height / 2
+                );
+                context.lineTo(
+                    ball.history[i].x + canvas.width / 2,
+                    ball.history[i].y + canvas.height / 2
+                ); 
                 context.strokeStyle = "rgba(" + STABLE_COLOR + "," + i / ball.history.length + ")";
                 context.stroke();
             }
@@ -278,8 +290,8 @@ function update(){
             context.fillStyle = ball.color().ghost;
             context.beginPath();
             context.arc(
-                ball.history[ball.history.length - 1].x,
-                ball.history[ball.history.length - 1].y, 
+                ball.history[ball.history.length - 1].x + canvas.width / 2,
+                ball.history[ball.history.length - 1].y + canvas.height / 2, 
                 ball.r, 0, Math.PI * 2
             );
             context.closePath();
@@ -287,7 +299,11 @@ function update(){
         }
         context.fillStyle = ball.color().main;
         context.beginPath();
-        context.arc(ball.position.x, ball.position.y, ball.r, 0, Math.PI * 2);
+        context.arc(
+            ball.position.x + canvas.width / 2,
+            ball.position.y + canvas.height / 2,
+            ball.r, 0, Math.PI * 2
+        );
         context.closePath();
         context.fill();
     });
