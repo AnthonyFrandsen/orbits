@@ -216,14 +216,14 @@ function update(){
             ball.stable = true;
         });
         for (let i = 0; i < balls.length; i++){
-            current_ball = balls[i];
+            let current_ball = balls[i];
             let to_center = new Vector(0, 0);
             to_center.mutable_subtract(current_ball.position);
             to_center.mutable_multiply(ATTRACTION_FORCE);
             current_ball.velocity.mutable_add(to_center);
     
             for (let k = i + 1; k < balls.length; k++){
-                collider = balls[k];
+                let collider = balls[k];
                 const collide_vec = current_ball.position.subtract(collider.position);
                 const dist = Math.sqrt(collide_vec.x*collide_vec.x + collide_vec.y*collide_vec.y);
     
