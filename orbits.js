@@ -238,17 +238,19 @@ function update(){
             }
         });
     
-        //check if all balls are stable and stop fastforwarding if so
-        let allStable = true;
-        for (let i = 0; i < balls.length; i++){
-            if (balls[i].stableCount < COUNT_UNTIL_STABLE + EXTRA_COUNT_UNTIL_ALL_STABLE){
-                allStable = false;
-                break;
+        //check to see if we can stop solving
+        if (max_speed){
+            let allStable = true;
+            for (let i = 0; i < balls.length; i++){
+                if (balls[i].stableCount < COUNT_UNTIL_STABLE + EXTRA_COUNT_UNTIL_ALL_STABLE){
+                    allStable = false;
+                    break;
+                }
             }
-        }
-        if (max_speed && allStable){
-            max_speed = false;
-            fps = FPS_DEFAULT;
+            if (allStable){
+                max_speed = false;
+                fps = FPS_DEFAULT;
+            }
         }
     
         //update the balls
