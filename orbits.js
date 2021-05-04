@@ -102,10 +102,17 @@ class Ball{
     update(){
         //Add the current position into the history for displaying trails.
         //If too many in history, remove oldest one.
+        //Check stability
         //Finally, update current position.
         this.history.push(new Vector(this.position.x, this.position.y));
         if (this.history.length > MAX_TRAIL_LENGTH){
             this.history.shift();
+        }
+        if (this.stable){
+            this.stableCount++;
+        }
+        else{
+            this.stableCount = 0;
         }
         this.position.mutable_add(this.velocity);
     }
@@ -229,15 +236,12 @@ function update(){
                 }
             }
         }
-        balls.forEach(function(ball){
-            if (ball.stable){
-                ball.stableCount++;
-            }
-            else{
-                ball.stableCount = 0;
-            }
-        });
     
+        //update the balls
+        balls.forEach(ball => {
+            ball.update();
+        });  
+
         //check to see if we can stop solving
         if (max_speed){
             let allStable = true;
@@ -252,11 +256,6 @@ function update(){
                 fps = FPS_DEFAULT;
             }
         }
-    
-        //update the balls
-        balls.forEach(ball => {
-            ball.update();
-        });  
     } while(max_speed)
 
     //display the trails
