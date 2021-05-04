@@ -197,15 +197,11 @@ function update(){
     do{
         //clear the screen
         context.clearRect(0, 0, canvas.width, canvas.height);
-    
-        //update the balls
-        stable = true;
-    
+        
+        //Logic presented here is transcribed from the C++ source code by Jean Tampon at https://github.com/johnBuffer/NoCol
         balls.forEach(ball => {
             ball.stable = true;
         });
-    
-        //Logic presented here is transcribed from the C++ source code by Jean Tampon at https://github.com/johnBuffer/NoCol
         for (let i = 0; i < balls.length; i++){
             current_ball = balls[i];
             let to_center = new Vector(canvas.width * 0.5, canvas.height * 0.5);
