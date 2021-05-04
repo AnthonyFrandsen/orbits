@@ -257,45 +257,43 @@ function update(){
         //update the balls
         balls.forEach(ball => {
             ball.update();
-        });
-
-        //only animate if not solving
-        if (!max_speed){
-            //display the trails
-            balls.forEach(ball => {
-                if (ball.history.length > 0){
-                    for (i = 1; i < ball.history.length; i++){
-                        context.beginPath();
-                        context.moveTo(ball.history[i - 1].x, ball.history[i - 1].y);
-                        context.lineTo(ball.history[i].x, ball.history[i].y); 
-                        context.strokeStyle = "rgba(" + STABLE_COLOR + "," + i / ball.history.length + ")";
-                        context.stroke();
-                    }
-                }
-            });
-            //display the balls
-            balls.forEach(ball => {
-                //after image for slowmo
-                if (fps < SLOWMO_FPS && ball.history.length > 0){
-                    context.fillStyle = ball.color().ghost;
-                    context.beginPath();
-                    context.arc(
-                        ball.history[ball.history.length - 1].x,
-                        ball.history[ball.history.length - 1].y, 
-                        ball.r, 0, Math.PI * 2
-                    );
-                    context.closePath();
-                    context.fill();
-                }
-                context.fillStyle = ball.color().main;
-                context.beginPath();
-                context.arc(ball.position.x, ball.position.y, ball.r, 0, Math.PI * 2);
-                context.closePath();
-                context.fill();
-            });
-        }
+        });  
     } while(max_speed)
 
+    //display the trails
+    balls.forEach(ball => {
+        if (ball.history.length > 0){
+            for (i = 1; i < ball.history.length; i++){
+                context.beginPath();
+                context.moveTo(ball.history[i - 1].x, ball.history[i - 1].y);
+                context.lineTo(ball.history[i].x, ball.history[i].y); 
+                context.strokeStyle = "rgba(" + STABLE_COLOR + "," + i / ball.history.length + ")";
+                context.stroke();
+            }
+        }
+    });
+    
+    //display the balls
+    balls.forEach(ball => {
+        //after image for slowmo
+        if (fps < SLOWMO_FPS && ball.history.length > 0){
+            context.fillStyle = ball.color().ghost;
+            context.beginPath();
+            context.arc(
+                ball.history[ball.history.length - 1].x,
+                ball.history[ball.history.length - 1].y, 
+                ball.r, 0, Math.PI * 2
+            );
+            context.closePath();
+            context.fill();
+        }
+        context.fillStyle = ball.color().main;
+        context.beginPath();
+        context.arc(ball.position.x, ball.position.y, ball.r, 0, Math.PI * 2);
+        context.closePath();
+        context.fill();
+    });
+    
     //call the next update
     window.setTimeout(update, 1000 / fps);
 }
