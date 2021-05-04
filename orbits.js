@@ -22,6 +22,7 @@ const STABLE_COLOR_RED = 180;
 const STABLE_COLOR_GREEN = 218;
 const STABLE_COLOR_BLUE = 85;
 const STABLE_COLOR = STABLE_COLOR_RED + "," + STABLE_COLOR_GREEN + "," + STABLE_COLOR_BLUE;
+const GHOST_OPACITY = 0.5;
 const COUNT_UNTIL_STABLE = 60;
 const EXTRA_COUNT_UNTIL_ALL_STABLE = 1200;
 
@@ -81,7 +82,7 @@ class Ball{
         if (this.stableCount > COUNT_UNTIL_STABLE){
             return{
                 main: "rgb(" + STABLE_COLOR + ")",
-                ghost: "rgba(" + STABLE_COLOR + ",0.5)"
+                ghost: "rgba(" + STABLE_COLOR + "," + GHOST_OPACITY + ")"
             }
         }
 
@@ -95,7 +96,7 @@ class Ball{
         output += (UNSTABLE_COLOR_BLUE + colorOffset);
         return{
             main: "rgb(" + output + ")",
-            ghost: "rgba(" + output + ",0.5)"
+            ghost: "rgba(" + output + "," + GHOST_OPACITY + ")"
         }
     }
     
