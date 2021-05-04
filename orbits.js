@@ -115,7 +115,6 @@ var context;
 var fps = 60;
 var max_speed = false;
 var balls = [];
-var bannerHidden = false;
 
 //Function called when page and all resources are loaded
 window.addEventListener("load", function(){    
@@ -131,7 +130,7 @@ window.addEventListener("load", function(){
 
     //Click the hide/show button to collapse the top banner
     document.getElementById("hide_show").addEventListener("click", function(){
-        if (bannerHidden){
+        if (document.getElementById("header").style.getPropertyValue("display") === "none"){
             document.getElementById("header").style.setProperty("display", "block");
             document.getElementById("hide_show").innerHTML = "Hide Instructions";
             bannerHidden = false;
