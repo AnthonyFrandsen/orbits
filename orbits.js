@@ -12,7 +12,9 @@ const ATTRACTION_FORCE = 0.0025;
 const MINIMUM_BALL_SIZE = 15;
 const MAXIMUM_BALL_SIZE = 50;
 const MAXIMUM_RANDOM_VELOCITY = 30;
-const SLOWMO_FPS = 30;
+const FPS_FAST_FORWARD = 240;
+const FPS_DEFAULT = 60;
+const FPS_SLOWMO = 10;
 const UNSTABLE_COLOR_RED = 244;
 const UNSTABLE_COLOR_GREEN = 32;
 const UNSTABLE_COLOR_BLUE = 105;
@@ -112,7 +114,7 @@ class Ball{
 /* Global Variables */
 var canvas;
 var context;
-var fps = 60;
+var fps = FPS_DEFAULT;
 var max_speed = false;
 var balls = [];
 
@@ -145,19 +147,19 @@ window.addEventListener("load", function(){
     //Click the slowmo button to slow the interval down
     document.getElementById("slow-mo").addEventListener("click", function(){
         max_speed = false;
-        fps = 10;
+        fps = FPS_SLOWMO;
     });
 
     //Click the reset speed button to reset the interval
     document.getElementById("regular-speed").addEventListener("click", function(){
         max_speed = false;
-        fps = 60;
+        fps = FPS_DEFAULT;
     });
 
     //Click the slowmo button to speed the interval up
     document.getElementById("fast-forward").addEventListener("click", function(){
         max_speed = false;
-        fps = 240;
+        fps = FPS_FAST_FORWARD;
     });
 
     //Click the max speed button to cycle as fast as possible
@@ -197,8 +199,8 @@ function update(){
     do{
         //clear the screen
         context.clearRect(0, 0, canvas.width, canvas.height);
-        
-        //Logic presented here is transcribed from the C++ source code by Jean Tampon at https://github.com/johnBuffer/NoCol
+
+        //Collision and gravity logic presented here is transcribed from the C++ source code by Jean Tampon at https://github.com/johnBuffer/NoCol
         balls.forEach(ball => {
             ball.stable = true;
         });
@@ -246,7 +248,7 @@ function update(){
         }
         if (max_speed && allStable){
             max_speed = false;
-            fps = 60;
+            fps = FPS_DEFAULT;
         }
     
         //update the balls
@@ -271,7 +273,7 @@ function update(){
     //display the balls
     balls.forEach(ball => {
         //after image for slowmo
-        if (fps < SLOWMO_FPS && ball.history.length > 0){
+        if (fps <= FPS_SLOWMO && ball.history.length > 0){
             context.fillStyle = ball.color().ghost;
             context.beginPath();
             context.arc(
