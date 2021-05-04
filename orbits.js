@@ -142,12 +142,10 @@ window.addEventListener("load", function(){
         if (document.getElementById("header").style.getPropertyValue("display") === "none"){
             document.getElementById("header").style.setProperty("display", "block");
             document.getElementById("hide_show").innerHTML = "Hide Instructions";
-            bannerHidden = false;
         }
         else{
             document.getElementById("header").style.setProperty("display", "none");
             document.getElementById("hide_show").innerHTML = "Show Instructions";
-            bannerHidden = true;
         }
     });
 
