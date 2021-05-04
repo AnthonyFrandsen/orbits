@@ -272,7 +272,7 @@ function update(){
             }
         }
     });
-    
+
     //display the balls
     balls.forEach(ball => {
         //after image for slowmo
