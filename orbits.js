@@ -1,9 +1,8 @@
-//  Anthony Frandsen
-//  April 27, 2021
-//  Week 15 Assignment
-
 /*
-    Use you imagination and create a Web application that uses the mouse to interact with image(s) and text.
+This project was originally an assignment for COP3813 at EFSC
+I have since added many adjustments and refactored it a few times
+It's all based on a YouTube video uploaded on the channel "Pezzza's Work"
+Original code provided by Jean Tampon at https://github.com/johnBuffer/NoCol
 */
 
 /* Constants */
