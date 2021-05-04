@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<!-- Anthony Frandsen -->
+<!-- April 27, 2021 -->
+<!-- Week 15 Assignment -->
+<!-- 
+    Use you imagination and create a Web application that uses the mouse to interact with image(s) and text.
+-->
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>Week 15 Assignment</title>
+
+        <!--Google Fonts-->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pros&family=Poppins&display=swap" rel="stylesheet">
+
+        <!--External style sheet-->
+        <link rel="stylesheet" type="text/css" href="orbits.css">
+
+        <!--External javascript file-->
+        <script src="orbits.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div id="header">
+                <h1>Week 15 Assignment</h1>
+                <p>Based on <a href="https://www.youtube.com/watch?v=SqpIcsN0FTI">this video by Jean Tampon</a></p>
+                <p>I know the assignment was supposed to be interacting with the mouse, but I got carried away with using canvas to draw objects.</p>
+                <p>Click to add an orbiting ball. When balls collide, they turn pink, then fade to green when they don't collide. It seems that eventually the balls will find an orbit where they don't collide!</p>
+                <p>Use the buttons to clear objects and adjust the speed. The "Solve" button will run the simulation without updating the display until a stable orbit has been reached for a certain amount of time. This does not mean the orbits will forever be stable, but the collisions will be very infrequent.</p>
+            </div>
+            <button id="deleteButton">Delete Last Object</button>
+            <button id="resetButton">Reset All Objects</button>
+            <button id="hide_show">Hide Instructions</button>
+            <button id="slow-mo">Slow Mo</button>
+            <button id="regular-speed">Reset Speed</button>
+            <button id="fast-forward">Fast Forward</button>
+            <button id="max-speed">Solve</button>
+        </header>
+        <main>
+            <canvas id="canvas"></canvas>
+            <p id="balls"></p>
+        </main>
+    </body>
+</html>
